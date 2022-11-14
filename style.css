@@ -1,0 +1,115 @@
+body {
+    font-family: 'Inconsolata', monospace;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+:focus {
+    outline: none;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    margin-top: auto;
+    justify-content: center;
+    align-items: center;
+}
+.filter {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    justify-content: space-between;
+    align-self: center;
+}
+input,
+button {
+    padding: 10px 5px;
+    border: none;
+    font-family: 'Inconsolata', monospace;
+}
+input {
+    width: 70%;
+    padding-left: 10px;
+    border-bottom: 2px solid rgb(153, 199, 54);
+    background-color: rgb(246, 243, 247);
+}
+button {
+    width: 20%;
+    background-color: rgb(153, 199, 54);
+    border-radius: 2px;
+}
+
+
+.card-container {
+    display: block;
+    height: 70%;
+    width: 100%;
+}
+#loading-overlay {
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#loading-overlay .typing {
+    width: 10ch;
+    animation: typing 1.4s steps(12) infinite;
+    white-space: nowrap;
+    overflow: hidden;
+}
+@keyframes typing {
+    0% { width: 7ch }
+    25% { width: 8ch }
+    45% { width: 10ch }
+    50% { width: 10ch }
+    68% { width: 9ch }
+    75% { width: 8ch }
+    85% { width: 7.5ch }
+    100% { width: 7ch }
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    min-height: 350px;
+    max-height: 550px;
+    margin: 20px auto;
+    background-color: rgb(182, 222, 236);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.city {
+    font-size: 2.2rem;
+    font-weight: bolder;
+    position: relative;
+}
+.city .country {
+    position: absolute;
+    font-size: .8rem;
+    padding: 2px 4px;
+    background-color: rgb(253, 132, 88);
+    border-radius: 5px;
+
+}
+.temperature {
+    position: relative;
+}
+.temperature .degree {
+    position: absolute;
+    font-size: .6em;
+    color: rgb(111, 159, 8);
+}
+
+@media (min-width: 768px) {
+    input,
+    button {
+        font-size: 1.2rem;
+    }
+}
