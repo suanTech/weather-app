@@ -1,3 +1,17 @@
+// Primary function
+function checkError(res) {
+    if (!res.ok) {
+        throw Error (res.statusText)
+    }
+    return res;
+}
+
+function fetchData(url) {
+    return fetch(url)
+            .then(checkError)
+            .then((res) => res.json())
+            .catch((err) => console.log(err))
+}
 
 // Use current location for fetching data when loading
 const api = 'ad0a44efe4f2661d802c38929e4e7f13';
@@ -12,10 +26,8 @@ window.addEventListener('load', () => {
             long = position.coords.longitude;
             lat = position.coords.latitude;
             const call = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${api}&units=metric`;
-            fetch(call)
-                .then((res) => res.json())
+            fetchData(call)
                 .then(displayWeather)
-                .catch((err) => console.log(err))
         })
     }
 })
@@ -38,8 +50,15 @@ function displayWeather(data) {
             </div>
         </div>`
 }
+function changeBG() { 
+    const card = document.querySelector('.card');
+    const bgColors = ['#DEECB6','#ECB6DE','#DFB6EC','#B7B6EC','#F7E2A4']
+    const randomNum = Math.floor(Math.random() * bgColors.length);
+    const randomColor = bgColors[randomNum];
+    card.style.background = randomColor;
+}
 
-// Fetch with city name search
+// Fetch API with city name search
 const searchInput = document.querySelector('.search');
 const submitBtn = document.querySelector('.submitBtn');
 
@@ -51,10 +70,13 @@ function searchCity (e) {
         input = input.toUpperCase();
         const city = input;
         const call = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&units=metric`;
-        fetch(call)
-            .then((res) => res.json())
+        fetchData(call)
             .then(displayWeather)
-            .catch((err) => console.log(err))
+            .then(changeBG)
+            .catch((err) => {
+                alert('ERROR: Please enter valid city/town !')
+                err = 'invalid city/town'
+            });
         submitBtn.click();
     }
 }
